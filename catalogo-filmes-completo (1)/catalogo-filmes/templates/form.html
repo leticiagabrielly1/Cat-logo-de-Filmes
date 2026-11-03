@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}{{ 'Editar filme' if editar else 'Cadastrar filme' }}{% endblock %}
+{% block content %}
+<div class="form-page"><a class="back" href="{{ url_for('index') }}">← Voltar ao catálogo</a><p class="eyebrow">{{ 'ATUALIZE SUA COLEÇÃO' if editar else 'MAIS UMA HISTÓRIA NA LISTA' }}</p><h1>{{ 'Editar filme' if editar else 'Cadastrar filme' }}</h1><p>Preencha os dados abaixo. Todos os campos são obrigatórios.</p>
+{% if errors %}<div class="errors" role="alert"><strong>Confira os dados:</strong><ul>{% for error in errors %}<li>{{ error }}</li>{% endfor %}</ul></div>{% endif %}
+<form method="post" class="panel"><input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+<label for="titulo">Título do filme</label><input id="titulo" name="titulo" value="{{ filme.get('titulo', '') }}" required maxlength="150" placeholder="Ex.: Interestelar">
+<label for="genero">Gênero</label><input id="genero" name="genero" value="{{ filme.get('genero', '') }}" required maxlength="60" list="generos" placeholder="Ex.: Ficção científica"><datalist id="generos">{% for genero in ['Ação','Animação','Aventura','Comédia','Documentário','Drama','Fantasia','Ficção científica','Romance','Suspense','Terror'] %}<option value="{{ genero }}">{% endfor %}</datalist>
+<div class="form-grid"><div><label for="ano">Ano de lançamento</label><input type="number" id="ano" name="ano" min="1888" max="2100" step="1" value="{{ filme.get('ano', '') }}" required placeholder="2024"></div><div><label for="nota">Sua nota (1 a 10)</label><input type="number" id="nota" name="nota" min="1" max="10" step="any" value="{{ filme.get('nota', '') }}" required placeholder="8.5"></div></div>
+<div class="form-actions"><button class="button" type="submit">{{ 'Salvar alterações' if editar else 'Cadastrar filme' }}</button><a class="back" href="{{ url_for('index') }}">Cancelar</a></div></form></div>
+{% endblock %}

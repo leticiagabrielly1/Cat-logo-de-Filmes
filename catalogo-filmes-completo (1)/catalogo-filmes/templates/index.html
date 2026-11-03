@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="hero"><p class="eyebrow">SUA PRÓXIMA SESSÃO COMEÇA AQUI</p><h1>Histórias que merecem<br>um lugar na sua lista.</h1><p>Organize seus filmes, registre suas notas e revisite seus favoritos.</p><a class="button" href="{{ url_for('cadastrar') }}">＋ Cadastrar filme</a></section>
+<section aria-labelledby="catalogo"><div class="section-head"><div><p class="eyebrow">SUA COLEÇÃO</p><h2 id="catalogo">Meu catálogo <span class="count">{{ filmes|length }}</span></h2></div>{% if media is not none %}<p class="average">Nota média <strong>★ {{ '%.1f'|format(media) }}</strong></p>{% endif %}</div>
+{% if filmes %}<div class="grid">{% for filme in filmes %}<article class="card"><div class="card-art art-{{ loop.index0 % 3 }}"><span class="film-mark" aria-hidden="true">▶</span><span class="rating">★ {{ '%g'|format(filme.nota) }} <small>/ 10</small></span></div><div class="card-body"><p class="metadata">{{ filme.genero }} <span>· {{ filme.ano }}</span></p><h3>{{ filme.titulo }}</h3><div class="actions"><a href="{{ url_for('editar', movie_id=filme.id) }}">Editar filme ↗</a><a class="danger-link" href="{{ url_for('excluir', movie_id=filme.id) }}">Excluir</a></div></div></article>{% endfor %}</div>
+{% else %}<div class="empty"><span class="empty-icon" aria-hidden="true">▶</span><h3>Sua coleção começa com um filme.</h3><p>Cadastre o primeiro título e dê a sua nota.</p><a class="button secondary" href="{{ url_for('cadastrar') }}">Adicionar primeiro filme</a></div>{% endif %}</section>
+{% endblock %}

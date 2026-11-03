@@ -1,0 +1,3 @@
+{% extends 'base.html' %}
+{% block title %}Excluir filme{% endblock %}
+{% block content %}<div class="form-page"><a class="back" href="{{ url_for('index') }}">← Voltar ao catálogo</a><div class="panel"><p class="eyebrow">CONFIRMAR EXCLUSÃO</p><h1>Excluir este filme?</h1><p>O filme <strong>{{ filme.titulo }}</strong> será removido do catálogo. Essa ação não pode ser desfeita.</p><form method="post"><input type="hidden" name="csrf_token" value="{{ csrf_token }}"><div class="form-actions"><button type="submit" class="button danger">Sim, excluir filme</button><a class="back" href="{{ url_for('index') }}">Cancelar</a></div></form></div></div>{% endblock %}

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}Catálogo de Filmes{% endblock %} • CineLista</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<a class="skip" href="#conteudo">Pular para conteúdo</a>
+<header><nav class="wrap" aria-label="Navegação principal"><a class="brand" href="{{ url_for('index') }}"><span class="logo" aria-hidden="true">▶</span> CineLista<span class="tag">UC32</span></a><a class="navlink" href="{{ url_for('index') }}">Meu catálogo</a></nav></header>
+<main id="conteudo" class="wrap">
+{% for mensagem in get_flashed_messages() %}<div class="notice" role="status">{{ mensagem }}</div>{% endfor %}
+{% block content %}{% endblock %}
+</main>
+<footer class="wrap">Catálogo de Filmes <span>Python · Flask · SQLite</span></footer>
+</body></html>
